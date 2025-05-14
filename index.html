@@ -1,22 +1,317 @@
 <!DOCTYPE html>
 <html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/all.css" rel="stylesheet" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+    <title>Todas as Tarefas - To-do List</title>
+  </head>
+  <body>
+    <div id="menu"></div>
 
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
-   <link href="assets/css/bootstrap.css" rel="stylesheet">
-   <link href="assets/css/all.css" rel="stylesheet">
-   <link href="assets/css/styles.css" rel="stylesheet">
-   <title>Bootstrap</title>
-</head>
+    <div class="container mt-4 pb-5">
+      <div class="text-center mb-4 pt-4">
+        <h1
+          class="display-5 fw-bold"
+          style="font-family: 'Poppins', sans-serif; color: #0d6efd"
+        >
+          <i class="fas fa-tasks me-2"></i>Todas as Tarefas
+        </h1>
+        <hr
+          class="mx-auto"
+          style="width: 120px; border: 2px solid #0d6efd; opacity: 0.8"
+        />
+      </div>
 
-<body>
+      <div class="row g-4">
+        <!-- Coluna: Para Fazer -->
+        <div class="col-md-3">
+          <div
+            class="kanban-column"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <div class="kanban-title">Para Fazer</div>
 
-   <!-- Aqui entra o conteúdo dessa página. -->
+            <div
+              class="card shadow-sm mb-3"
+              draggable="true"
+              ondragstart="drag(event)"
+              id="task1"
+              data-bs-toggle="modal"
+              data-bs-target="#modalTask1"
+              style="cursor: pointer"
+            >
+              <div class="card-body">
+                <h5 class="card-title">
+                  Estudar JavaScript
+                  <span class="float-end text-danger" title="Urgente"
+                    ><i class="fas fa-fire"></i
+                  ></span>
+                </h5>
+                <p class="card-text">Aprofundar funções e objetos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-   <script src="assets/js/jquery.js"></script>
-   <script src="assets/js/popper.js"></script>
-   <script src="assets/js/bootstrap.js"></script>
-   <script src="assets/js/script.js"></script>
-</body>
+        <!-- Coluna: Em andamento -->
+        <div class="col-md-3">
+          <div
+            class="kanban-column"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <div class="kanban-title">Em andamento</div>
+
+            <div
+              class="card shadow-sm mb-3"
+              draggable="true"
+              ondragstart="drag(event)"
+              id="task2"
+              data-bs-toggle="modal"
+              data-bs-target="#modalTask2"
+              style="cursor: pointer"
+            >
+              <div class="card-body">
+                <h5 class="card-title">
+                  Revisar protótipo
+                  <span class="float-end text-warning" title="Importante"
+                    ><i class="fas fa-exclamation-triangle"></i
+                  ></span>
+                </h5>
+                <p class="card-text">Validar com time de design.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna: Travada -->
+        <div class="col-md-3">
+          <div
+            class="kanban-column"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <div class="kanban-title">Travada</div>
+
+            <div
+              class="card shadow-sm mb-3"
+              draggable="true"
+              ondragstart="drag(event)"
+              id="task3"
+              data-bs-toggle="modal"
+              data-bs-target="#modalTask3"
+              style="cursor: pointer"
+            >
+              <div class="card-body">
+                <h5 class="card-title">
+                  Aguardando cliente
+                  <span class="float-end text-secondary" title="Normal"
+                    ><i class="fas fa-clock"></i
+                  ></span>
+                </h5>
+                <p class="card-text">Esperando retorno por e-mail.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna: Concluída -->
+        <div class="col-md-3">
+          <div
+            class="kanban-column"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <div class="kanban-title">Concluída</div>
+
+            <div
+              class="card shadow-sm mb-3 completed-card"
+              draggable="true"
+              ondragstart="drag(event)"
+              id="task4"
+              data-bs-toggle="modal"
+              data-bs-target="#modalTask4"
+              style="cursor: pointer"
+            >
+              <div class="card-body">
+                <h5 class="card-title text-muted">
+                  Enviar apresentação
+                  <span class="float-end text-muted" title="Baixa"
+                    ><i class="fas fa-arrow-down"></i
+                  ></span>
+                </h5>
+                <p class="card-text text-muted">Slides entregues ao gestor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modais -->
+
+    <!-- Modal 1 -->
+    <div
+      class="modal fade"
+      id="modalTask1"
+      tabindex="-1"
+      aria-labelledby="modalTask1Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="modalTask1Label">Estudar JavaScript</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Descrição:</strong> Aprofundar conceitos de funções e
+              objetos.
+            </p>
+            <p><strong>Responsável:</strong> Ana Souza</p>
+            <p>
+              <strong>Prioridade:</strong>
+              <span class="text-danger fw-bold">Urgente</span>
+              <i class="fas fa-fire text-danger"></i>
+            </p>
+            <p><strong>Data de criação:</strong> 10/05/2025</p>
+            <p><strong>Local:</strong> Biblioteca Setor 2</p>
+            <p><strong>Hora:</strong> 16:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div
+      class="modal fade"
+      id="modalTask2"
+      tabindex="-1"
+      aria-labelledby="modalTask2Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning text-white">
+            <h5 class="modal-title" id="modalTask2Label">Revisar protótipo</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Descrição:</strong> Validar o protótipo com o time de
+              design.
+            </p>
+            <p><strong>Responsável:</strong> João Dias</p>
+            <p>
+              <strong>Prioridade:</strong>
+              <span class="text-warning fw-bold">Importante</span>
+              <i class="fas fa-exclamation-triangle text-warning"></i>
+            </p>
+            <p><strong>Data de criação:</strong> 08/05/2025</p>
+            <p><strong>Local:</strong> Escritório UX</p>
+            <p><strong>Hora:</strong> 09:30</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div
+      class="modal fade"
+      id="modalTask3"
+      tabindex="-1"
+      aria-labelledby="modalTask3Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-secondary text-white">
+            <h5 class="modal-title" id="modalTask3Label">Aguardando cliente</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Descrição:</strong> Cliente ainda não deu retorno.</p>
+            <p><strong>Responsável:</strong> Carla Mendes</p>
+            <p>
+              <strong>Prioridade:</strong>
+              <span class="text-secondary fw-bold">Normal</span>
+              <i class="fas fa-clock text-secondary"></i>
+            </p>
+            <p><strong>Data de criação:</strong> 06/05/2025</p>
+            <p><strong>Local:</strong> Suporte Comercial</p>
+            <p><strong>Hora:</strong> 14:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div
+      class="modal fade"
+      id="modalTask4"
+      tabindex="-1"
+      aria-labelledby="modalTask4Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="modalTask4Label">
+              Enviar apresentação
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Descrição:</strong> Apresentação enviada ao gestor com os
+              resultados finais.
+            </p>
+            <p><strong>Responsável:</strong> Marcos Lima</p>
+            <p>
+              <strong>Prioridade:</strong>
+              <span class="text-muted fw-bold">Baixa</span>
+              <i class="fas fa-arrow-down text-muted"></i>
+            </p>
+            <p><strong>Data de criação:</strong> 01/05/2025</p>
+            <p>
+              <strong>Data de conclusão:</strong>
+              <span class="text-success">13/05/2025</span>
+            </p>
+            <p><strong>Local:</strong> Home Office</p>
+            <p><strong>Hora:</strong> 10:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>
